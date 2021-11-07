@@ -5,6 +5,7 @@ import NavDrawer from "../../components/NavDrawer";
 import Carousel from "./Carousel";
 import PortfolioSection from "./PortfolioSection";
 import PublicationsSection from "./PublicationsSection";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   return (
@@ -14,15 +15,7 @@ export default function Home() {
       <Carousel />
       <PortfolioSection />
       <PublicationsSection />
+      <Footer />
     </div>
   );
 }
-/*
-
-import React from "react";
-
-export default function NavBar() {
-  return <div></div>;
-}
-
-*/

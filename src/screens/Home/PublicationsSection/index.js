@@ -42,6 +42,7 @@ export default function PublicationsSection() {
   );
 }
 
+//styles
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -76,6 +77,7 @@ const Grid = styled.div`
   }
   @media ${vars.device.desktop} {
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
   }
 `;
 const GridButton = styled(ButtonLink)`
