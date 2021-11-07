@@ -15,8 +15,8 @@ export default function NavDrawer() {
       <Box>
         <DrawerItem title="start" path="/" />
         <DrawerItem title="portfolio" path="/portfolio" />
-        <DrawerItem title="publikacje" path="/publikacje" />
-        <DrawerItem title="o mnie" path="/o_mnie" />
+        <DrawerItem title="publikacje" path="/publications" />
+        <DrawerItem title="o mnie" path="/about" />
 
         <Version>v.1.0.0</Version>
       </Box>
@@ -49,4 +49,3 @@ const Version = styled.aside`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.grey};
 `;
-

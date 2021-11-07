@@ -61,7 +61,7 @@ export default function Single() {
     <Container>
       <NavBar />
       <NavDrawer />
-      <Header title="nazwa sesji" subTitle="27.12.1988" />
+      <Header title={title} subTitle="27.12.1988" />
       <ImageGrideList photos={photos} />
       <Footer />
     </Container>

@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 //components
 import NavBar from "../../components/NavBar";
 import NavDrawer from "../../components/NavDrawer";
+import Title from "../../components/Title";
 import ImageGrideList from "../../components/ImageGrideList";
 import Footer from "../../components/Footer";
 
@@ -53,10 +55,14 @@ const photos = [
 ];
 
 export default function List() {
+  //hooks
+  const { pathname } = useLocation();
+
   return (
     <Container>
       <NavBar />
       <NavDrawer />
+      <Header title={pathname === "/portfolio" ? "portfolio" : "publikacje"} />
       <ImageGrideList isLink photos={photos} />
       <Footer />
     </Container>
@@ -69,18 +75,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
-
-/*
-
-import React from "react";
-import styled from "styled-components";
+const Header = styled(Title)`
+  height: 20vh;
+`;
 
 
-export default function NavBar() {
-  return <div></div>;
-}
-
-const Container = styled.div``
-const Box = styled.section``
-
-*/

@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
 
 export default function DrawerItem({ title, path }) {
   //hooks
   const { pathname } = useLocation();
-  const [isActive] = useState(pathname === path);
+  const [isActive, setIsActive] = useState(pathname === path);
   const [isOver, setIsOver] = useState(false);
 
   //handlers
   const handleMouseEnter = () => !isActive && setIsOver(true);
   const handleMouseLeave = () => !isActive && setIsOver(false);
+
+  useEffect(() => {
+    setIsActive(pathname === path);
+    setIsOver(false);
+  }, [pathname]);
 
   return (
     <Item onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

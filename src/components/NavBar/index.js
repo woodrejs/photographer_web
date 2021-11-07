@@ -33,7 +33,7 @@ export default function NavBar() {
         <NavItem title="portfolio" path="/portfolio" />
         <NavLogo />
         <NavItem title="publikacje" path="/publications" />
-        <NavItem title="o mnie" path="/o_mnie" />
+        <NavItem title="o mnie" path="/about" />
         <NavIcon />
       </Box>
     </Container>

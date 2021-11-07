@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./screens/Home";
 import List from "./screens/List";
 import Single from "./screens/Single";
+import About from "./screens/About";
+import Page404 from "./screens/404";
 
 export default function App() {
   return (
@@ -16,7 +18,8 @@ export default function App() {
           <Route path="/portfolio" element={<List />} />
           <Route path="/session/:title" element={<Single />} />
           <Route path="/publication/:title" element={<Single />} />
-          {/* <Route path="/" component={Page404} />  */}
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
     </Container>
