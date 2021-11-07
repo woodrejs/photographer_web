@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function DrawerItem({ title, path }) {
   //hooks
@@ -23,7 +23,7 @@ const Item = styled.div`
   padding: 20px 0;
   margin-bottom: 10px;
 `;
-const Anchor = styled(Link)`
+const Anchor = styled(NavLink)`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;

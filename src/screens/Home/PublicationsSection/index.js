@@ -6,7 +6,7 @@ import ImageItem from "../../../components/ImageItem";
 //utils
 import { vars } from "../../../utils/vars";
 
-export default function PublicationsSection() {
+export default function publicationSection() {
   return (
     <Container>
       <Box>
@@ -14,22 +14,22 @@ export default function PublicationsSection() {
           <GridButton title="Publikacje" path="/publications" />
           <Image_1
             title="tytule publikcji"
-            path="/publications/name"
+            path="/publication/title"
             url="https://images.unsplash.com/photo-1616456260910-5c45b4207dd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
           />
           <Image_2
             title="tytule publikcji"
-            path="/publications/name"
+            path="/publication/title"
             url="https://images.unsplash.com/photo-1616456260910-5c45b4207dd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
           />
           <Image_3
             title="tytule publikcji"
-            path="/publications/name"
+            path="/publication/title"
             url="https://images.unsplash.com/photo-1616456260910-5c45b4207dd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
           />
           <Image_4
             title="tytule publikcji"
-            path="/publications/name"
+            path="/publication/title"
             url="https://images.unsplash.com/photo-1616456260910-5c45b4207dd3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
           />
           <Text>

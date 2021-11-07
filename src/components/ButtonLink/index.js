@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function ButtonLink({ title, path, className }) {
   return (
@@ -17,7 +17,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Button = styled(Link)`
+const Button = styled(NavLink)`
   text-decoration: underline;
   background-color: transparent;
   border: none;

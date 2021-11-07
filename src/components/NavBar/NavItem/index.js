@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 //utils
 import { vars } from "../../../utils/vars";
 
@@ -33,7 +33,7 @@ const Item = styled.div`
     display: block;
   }
 `;
-const Anchor = styled(Link)`
+const Anchor = styled(NavLink)`
   font-size: 13px;
 
   font-weight: bold;

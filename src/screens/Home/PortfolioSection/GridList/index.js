@@ -10,32 +10,32 @@ export default function GridList() {
     <Container>
       <Image_1
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
       />
       <Image_2
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1635807013737-0717f29cdbaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
       />
       <Image_3
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
       />
       <Image_4
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1635354237155-6e46a33c330a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=749&q=80"
       />
       <Image_5
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1634588995089-52429235e058?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
       />
       <Image_6
         title="session name"
-        path="/session/name"
+        path="/session/title"
         url="https://images.unsplash.com/photo-1628281335380-449a00e56a90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80"
       />
     </Container>

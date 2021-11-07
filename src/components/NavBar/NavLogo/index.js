@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //assets
 import Logo_dark from "./logo_dark.svg";
 //utils
 import { vars } from "../../../utils/vars";
 
 const Container = styled.figure``;
-const Anchor = styled(Link)``;
+const Anchor = styled(NavLink)``;
 const Image = styled.img`
   height: 45px;
 

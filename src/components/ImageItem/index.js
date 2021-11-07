@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //utils
 import { vars } from "../../utils/vars";
 
@@ -12,7 +12,7 @@ export default function ImageItem({ url, title, path, className }) {
   );
 }
 
-const Container = styled(Link)`
+const Container = styled(NavLink)`
   width: 100%;
   height: 100%;
 
