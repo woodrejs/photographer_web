@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
+//utils
+import { checkIsActive } from "../../../utils/functions";
 
 export default function DrawerItem({ title, path }) {
   //hooks
   const { pathname } = useLocation();
-  const [isActive, setIsActive] = useState(pathname === path);
+  const [isActive, setIsActive] = useState(checkIsActive(pathname, path));
   const [isOver, setIsOver] = useState(false);
 
   //handlers
@@ -13,7 +15,7 @@ export default function DrawerItem({ title, path }) {
   const handleMouseLeave = () => !isActive && setIsOver(false);
 
   useEffect(() => {
-    setIsActive(pathname === path);
+    setIsActive(checkIsActive(pathname, path));
     setIsOver(false);
   }, [pathname]);
 
@@ -23,7 +25,7 @@ export default function DrawerItem({ title, path }) {
     </Item>
   );
 }
-
+//styles
 const Item = styled.div`
   padding: 20px 0;
   margin-bottom: 10px;

@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { NavLink, useLocation } from "react-router-dom";
 //utils
 import { vars } from "../../../utils/vars";
+import { checkIsActive } from "../../../utils/functions";
 
 export default function NavItem({ title, path }) {
   //hooks
   const { pathname } = useLocation();
-  const [isActive, setIsActive] = useState(pathname === path);
+  const [isActive, setIsActive] = useState(checkIsActive(pathname, path));
   const [isOver, setIsOver] = useState(false);
 
   //handlers
@@ -15,7 +16,7 @@ export default function NavItem({ title, path }) {
   const handleMouseLeave = () => !isActive && setIsOver(false);
 
   useEffect(() => {
-    setIsActive(pathname === path);
+    setIsActive(checkIsActive(pathname, path));
     setIsOver(false);
   }, [pathname]);
 
