@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 //components
 import AliceCarousel from "react-alice-carousel";
+import Slide from "./Slide";
 //utils
 import { vars } from "../../../utils/vars";
 
@@ -31,11 +32,7 @@ export default function Carousel() {
 }
 //functions
 function setImages(arr) {
-  const handleDragStart = (e) => e.preventDefault();
-
-  return arr.map((item) => (
-    <Image onDragStart={handleDragStart} role="presentation" url={item} />
-  ));
+  return arr.map((item) => <Slide url={item} />);
 }
 //styles
 const Container = styled.div`
@@ -46,14 +43,5 @@ const Container = styled.div`
 const Box = styled.section`
   max-width: 1366px;
   width: 100%;
-  ${vars.shadow}//shadow
-`;
-const Image = styled.figure`
-  width: 100%;
-  height: 70vh;
-
-  background-image: ${({ url }) => `url(${url})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  ${vars.shadow}
 `;

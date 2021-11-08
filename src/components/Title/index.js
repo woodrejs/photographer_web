@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import gsap from "gsap";
 
 export default function Title({ title, subTitle, className }) {
+  //hooks
+  const ref = useRef(null);
+
   return (
     <Container className={className}>
       <Box>
@@ -12,6 +16,7 @@ export default function Title({ title, subTitle, className }) {
   );
 }
 
+//styles
 const Container = styled.div`
   width: 100%;
   display: flex;
