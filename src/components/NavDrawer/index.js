@@ -12,8 +12,6 @@ export default function NavDrawer() {
   const { isOpen } = useSelector(({ navSlice }) => navSlice);
   const dispatch = useDispatch();
 
-  console.log(isOpen);
-
   //handlers
   const handleClick = () => {
     dispatch(setIsOpen(false));
@@ -35,6 +33,7 @@ export default function NavDrawer() {
 }
 //styles
 const Container = styled.section`
+  order: 2;
   height: 100vh;
   width: 100vw;
   top: 0;

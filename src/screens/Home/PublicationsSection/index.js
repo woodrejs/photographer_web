@@ -141,6 +141,7 @@ const GridItem = styled(ImageItem)`
 const Text = styled.p`
   justify-self: start;
   align-self: start;
+  opacity: 0.8;
 
   font-size: 14px;
   color: ${({ theme }) => theme.colors.dark};

@@ -29,6 +29,7 @@ export default function Footer() {
 }
 
 const Container = styled.div`
+  order: 4;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.dark};
   display: flex;
@@ -89,5 +90,3 @@ const Details = styled.span`
   margin-right: 10px;
   font-weight: bold;
 `;
-
-

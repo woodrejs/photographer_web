@@ -9,6 +9,9 @@ import "./styles/index.css";
 import "./styles/fonts.css";
 import "react-alice-carousel/lib/alice-carousel.css";
 
+//tmp
+import Loader from "./components/Loader";
+
 const theme = () => ({
   colors: {
     dark: "#0F1111",

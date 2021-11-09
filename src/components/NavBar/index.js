@@ -13,6 +13,8 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  order: 1;
 `;
 const Box = styled.nav`
   max-width: 1366px;

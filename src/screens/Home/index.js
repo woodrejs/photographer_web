@@ -1,21 +1,24 @@
 import React from "react";
+import styled from "styled-components";
 //components
-import NavBar from "../../components/NavBar";
-import NavDrawer from "../../components/NavDrawer";
 import Carousel from "./Carousel";
 import PortfolioSection from "./PortfolioSection";
 import PublicationsSection from "./PublicationsSection";
-import Footer from "../../components/Footer";
+import Transition from "../../components/Transition";
+
+
 
 export default function Home() {
   return (
-    <div>
-      <NavBar />
-      <NavDrawer />
+    <Container>
+      <Transition />
       <Carousel />
       <PortfolioSection />
       <PublicationsSection />
-      <Footer />
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  order: 3;
+`;

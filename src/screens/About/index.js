@@ -2,10 +2,8 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 //components
-import NavBar from "../../components/NavBar";
-import NavDrawer from "../../components/NavDrawer";
 import Title from "../../components/Title";
-import Footer from "../../components/Footer";
+import Transition from "../../components/Transition";
 //utils
 import { vars } from "../../utils/vars";
 
@@ -20,9 +18,8 @@ export default function About() {
 
   return (
     <Container>
-      <NavBar />
-      <NavDrawer />
-      <Header title="o mnie" subTitle="agnieszka podolan" />
+      <Transition />
+      <Header title="o mnie" />
       <Box>
         <Image
           ref={ref}
@@ -46,7 +43,6 @@ export default function About() {
           software like Aldus PageMaker including versions of Lorem Ipsum.
         </Text>
       </Box>
-      <Footer />
     </Container>
   );
 }
@@ -59,6 +55,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  order: 3;
 `;
 const Box = styled.section`
   width: 100%;
@@ -87,4 +84,5 @@ const Text = styled.p`
   text-align: center;
   padding: 0 20px;
   padding-top: 35px;
+  opacity: 0.8;
 `;

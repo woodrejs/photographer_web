@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+
 //components
-import NavBar from "../../components/NavBar";
-import NavDrawer from "../../components/NavDrawer";
 import Title from "../../components/Title";
 import ImageGrideList from "../../components/ImageGrideList";
-import Footer from "../../components/Footer";
+import Transition from "../../components/Transition";
 
 //strapi db
 const photos = [
@@ -54,22 +52,18 @@ const photos = [
   },
 ];
 
-export default function List() {
-  //hooks
-  const { pathname } = useLocation();
-
+export default function Publications() {
   return (
     <Container>
-      <NavBar />
-      <NavDrawer />
-      <Header title={pathname === "/portfolio" ? "portfolio" : "publikacje"} />
+      <Transition />
+      <Header title="publikacje" />
       <ImageGrideList isLink photos={photos} />
-      <Footer />
     </Container>
   );
 }
 
 const Container = styled.div`
+  order: 3;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -78,5 +72,3 @@ const Container = styled.div`
 const Header = styled(Title)`
   height: 20vh;
 `;
-
-

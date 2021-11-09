@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { NavLink, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 //utils
 import { checkIsActive } from "../../../utils/functions";
@@ -12,10 +12,15 @@ export default function DrawerItem({ title, path }) {
   const [isActive, setIsActive] = useState(checkIsActive(pathname, path));
   const [isOver, setIsOver] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //handlers
   const handleMouseEnter = () => !isActive && setIsOver(true);
   const handleMouseLeave = () => !isActive && setIsOver(false);
+  const handleClick = () => {
+    dispatch(setIsOpen(false));
+    navigate(path);
+  };
 
   useEffect(() => {
     setIsActive(checkIsActive(pathname, path));
@@ -23,13 +28,12 @@ export default function DrawerItem({ title, path }) {
   }, [pathname]);
 
   return (
-    <Item onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Anchor
-        onClick={() => dispatch(setIsOpen(undefined))}
-        to={path}
-        children={title}
-        $color={isActive || isOver}
-      />
+    <Item
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+    >
+      <Anchor children={title} $color={isActive || isOver} />
     </Item>
   );
 }
@@ -38,9 +42,10 @@ const Item = styled.div`
   padding: 20px 0;
   margin-bottom: 10px;
 `;
-const Anchor = styled(NavLink)`
+const Anchor = styled.span`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
   color: ${({ theme, $color }) => ($color ? theme.colors.light : theme.colors.grey)};
+  cursor: pointer;
 `;

@@ -1,23 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 //components
-import NavBar from "../../components/NavBar";
-import NavDrawer from "../../components/NavDrawer";
-import Footer from "../../components/Footer";
 import Title from "../../components/Title";
+import Transition from "../../components/Transition";
 
 export default function Page404() {
   return (
     <Container>
-      <NavBar />
-      <NavDrawer />
+      <Transition />
       <Header title="Page404" subTitle="nie ma takiej strony :(" />
-      <Footer />
     </Container>
   );
 }
 
 const Container = styled.div`
+  order: 3;
   min-height: 100vh;
   width: 100%;
   display: flex;
