@@ -12,11 +12,16 @@ export default function NavDrawer() {
   const { isOpen } = useSelector(({ navSlice }) => navSlice);
   const dispatch = useDispatch();
 
-  const handleClick = () => dispatch(setIsOpen(!isOpen));
+  console.log(isOpen);
+
+  //handlers
+  const handleClick = () => {
+    dispatch(setIsOpen(false));
+  };
 
   return (
     <Container $isOpen={isOpen}>
-      <Mask onClick={handleClick} />
+      <Mask onClick={handleClick} $isOpen={isOpen} />
       <Box>
         <DrawerItem title="start" path="/" />
         <DrawerItem title="portfolio" path="/portfolio" />
@@ -33,9 +38,11 @@ const Container = styled.section`
   height: 100vh;
   width: 100vw;
   top: 0;
-  left: ${({ $isOpen }) => ($isOpen ? "0px" : "-100vw")};
   z-index: 100;
   position: fixed;
+  transform: ${({ $isOpen }) => ($isOpen ? `translateX(0vw)` : `translateX(-100vw)`)};
+  transition: ${({ $isOpen }) =>
+    $isOpen ? `transform 0.3s ease-in-out` : `transform 0.3s ease-in-out 0.2s`};
 
   @media ${vars.device.tablet} {
     display: none;
@@ -48,7 +55,9 @@ const Mask = styled.div`
   top: 0;
   left: 0;
   background-color: ${({ theme }) => theme.colors.dark};
-  opacity: 0.5;
+  opacity: ${({ $isOpen }) => ($isOpen ? 0.8 : 0)};
+  transition: ${({ $isOpen }) =>
+    $isOpen ? `opacity 0.2s ease-in-out 0.2s` : `opacity 0.2s ease-in-out`};
 `;
 const Box = styled.nav`
   width: 60%;

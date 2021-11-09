@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import gsap from "gsap";
 //components
 import AliceCarousel from "react-alice-carousel";
 import Slide from "./Slide";
@@ -14,8 +15,16 @@ const items = [
 ];
 
 export default function Carousel() {
+  //hooks
+  const ref = useRef(null);
+
+  //effects
+  useEffect(() => {
+    gsap.to(ref.current, { opacity: 1, ease: "power2", y: -15 });
+  }, []);
+
   return (
-    <Container>
+    <Container ref={ref}>
       <Box>
         <AliceCarousel
           mouseTracking
@@ -39,6 +48,9 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
+  opacity: 0;
+  transform: translateY(15px);
 `;
 const Box = styled.section`
   max-width: 1366px;

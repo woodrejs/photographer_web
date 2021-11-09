@@ -52,6 +52,34 @@ const photos = [
     height: 1,
     key: "17",
   },
+  {
+    title: "title",
+    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    width: 2,
+    height: 3,
+    key: "18",
+  },
+  {
+    title: "title",
+    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    width: 1,
+    height: 1,
+    key: "19",
+  },
+  {
+    title: "title",
+    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    width: 2,
+    height: 3,
+    key: "20",
+  },
+  {
+    title: "title",
+    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    width: 1,
+    height: 1,
+    key: "21",
+  },
 ];
 
 export default function Single() {

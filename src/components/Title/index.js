@@ -1,11 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 
 export default function Title({ title, subTitle, className }) {
-  //hooks
-  const ref = useRef(null);
-
   return (
     <Container className={className}>
       <Box>

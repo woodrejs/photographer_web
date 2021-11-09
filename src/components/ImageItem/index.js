@@ -48,7 +48,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   opacity: 0;
-  transform: translateY(-15px);
+  transform: translateY(15px);
   cursor: pointer;
   ${vars.shadow}
   display: flex;

@@ -52,13 +52,15 @@ export default function GridList() {
       revealRefs.current.push(el);
     }
   };
+ 
 
   //effects
   useEffect(() => {
     if (revealRefs.current.length === 6 && inView) {
-      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: 15 });
+      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
   }, [revealRefs.current, inView]);
+
 
   return (
     <Container ref={ref}>

@@ -47,7 +47,7 @@ export default function PublicationSection() {
   //effects
   useEffect(() => {
     if (revealRefs.current.length === 4 && inView) {
-      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: 15 });
+      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
   }, [revealRefs.current, inView]);
 
@@ -121,7 +121,7 @@ const Grid = styled.div`
 `;
 const GridButton = styled(ButtonLink)`
   height: unset;
-  
+
   @media ${vars.device.tablet} {
     grid-column: 1/3;
   }

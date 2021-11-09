@@ -24,7 +24,6 @@ export default function ImageGrideList({ isLink = false, photos = [] }) {
     setCurrentImage(0);
     setViewerIsOpen(false);
   };
-
   const handleLink = (title) => {
     console.log(location.pathname);
     if (location.pathname === "/portfolio") {
@@ -32,7 +31,6 @@ export default function ImageGrideList({ isLink = false, photos = [] }) {
     }
     navigate(`/publication/${title}`);
   };
-
   const handleImageRenderer = ({ index, key, photo, left, top }) => (
     <GrideItem
       key={key}
