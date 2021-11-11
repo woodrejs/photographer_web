@@ -14,51 +14,52 @@ import NavBar from "./components/NavBar";
 import NavDrawer from "./components/NavDrawer";
 import Footer from "./components/Footer";
 
+
 const routes = [
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Start",
     path: "/",
     element: <Home />,
     exact: true,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Portfolio",
     path: "/portfolio",
     element: <Portfolio />,
-    exact: false,
+    exact: true,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Publications",
     path: "/publications",
     element: <Publications />,
-    exact: false,
+    exact: true,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Session",
-    path: "/session/:title",
+    path: "/sessions/:title",
     element: <Single />,
-    exact: false,
+    exact: true,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Publication",
-    path: "publication/:title",
+    path: "publications/:title",
     element: <Single />,
-    exact: false,
+    exact: true,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "About",
     path: "/about",
     element: <About />,
     exact: false,
   },
   {
-    id: uuidv4(),
+    key: uuidv4(),
     name: "Page404",
     path: "*",
     element: <Page404 />,

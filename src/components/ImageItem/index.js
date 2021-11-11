@@ -65,10 +65,10 @@ const Box = styled(NavLink)`
   position: relative;
   transform-origin: center;
 `;
-const Title = styled.span`
+const Title = styled.div`
   position: absolute;
   top: 10px;
-  right: -60px;
+  right: -20px;
   font-size: 12px;
   transform: rotateZ(90deg);
   transform-origin: left;

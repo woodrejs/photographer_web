@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 import gsap from "gsap";
 //utils
-import { vars } from "../../../utils/vars";
+import { vars } from "../../utils/vars";
 
-export default function GrideItem({ badge, photo, left, top, handler }) {
+export default function GridItem({ photo, handler, top, left, badge = null }) {
   //hooks
   const [isSelected, setIsSelected] = useState(false);
   const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
@@ -53,7 +53,7 @@ export default function GrideItem({ badge, photo, left, top, handler }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Badge>{badge}</Badge>
+      <Badge>{badge ?? photo.title}</Badge>
       <Box>
         <Image onClick={handleOnClick} photo={photo} ref={imageRef} />
       </Box>
@@ -89,7 +89,7 @@ const Image = styled.div`
 
   ${vars.shadow}
 `;
-const Badge = styled.span`
+const Badge = styled.div`
   position: absolute;
   top: 20px;
   right: 0px;

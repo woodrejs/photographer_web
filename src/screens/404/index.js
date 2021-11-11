@@ -15,11 +15,11 @@ export default function Page404() {
 
 const Container = styled.div`
   order: 3;
-  min-height: 100vh;
+  min-height: 60vh;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 const Header = styled(Title)``;

@@ -9,14 +9,7 @@ import { vars } from "../../../utils/vars";
 //assets
 import scroll_icon from "./scroll_icon.svg";
 
-//tmp fetch in future from strapi db
-const items = [
-  "https://images.unsplash.com/photo-1636142972514-0c75fc584a12?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80",
-  "https://images.unsplash.com/photo-1525258706463-a8c77635beb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-  "https://images.unsplash.com/photo-1513262834354-6b2bca9b5b8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=400&q=60",
-];
-
-export default function Carousel() {
+export default function Carousel({ list }) {
   //hooks
   const ref = useRef(null);
 
@@ -30,12 +23,12 @@ export default function Carousel() {
       <Box>
         <MaskBox>
           <Mask />
-          <Header>To jest jakis tytuł zachęcający do przejrzenia strony</Header>
+          <Header>Hej! Miło Cię widzieć na mojej stronie</Header>
           <Icon src={scroll_icon} alt="scroll_icon" />
         </MaskBox>
         <AliceCarousel
           mouseTracking
-          items={setImages(items)}
+          items={setImages(list)}
           disableButtonsControls
           disableDotsControls
           autoPlay
@@ -46,7 +39,10 @@ export default function Carousel() {
     </Container>
   );
 }
-
+//functions
+function setImages(arr) {
+  return arr.map((item) => <Slide url={item.src} key={item.id} />);
+}
 //styles
 const Container = styled.div`
   width: 100%;
@@ -88,8 +84,8 @@ const Header = styled.h1`
   max-width: 70%;
 
   @media ${vars.device.desktop} {
-    font-size: 36px;
-    max-width: 60%;
+    font-size: 45px;
+    max-width: 70%;
     line-height: 120%;
   }
 `;
@@ -98,8 +94,3 @@ const Icon = styled.img`
   height: 35px;
   margin-top: 250px;
 `;
-
-//functions
-function setImages(arr) {
-  return arr.map((item) => <Slide url={item} />);
-}

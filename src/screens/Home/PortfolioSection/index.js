@@ -3,18 +3,19 @@ import styled from "styled-components";
 //components
 import ButtonLink from "../../../components/ButtonLink";
 import GridList from "./GridList";
+//utils
 
-export default function PortfolioSection() {
+export default function PortfolioSection({ list }) {
   return (
     <Container>
       <Box>
         <ButtonLink title="Portfolio" path="/portfolio" />
-        <GridList />
+        <GridList list={list} />
       </Box>
     </Container>
   );
 }
-
+//styles
 const Container = styled.div`
   width: 100%;
 

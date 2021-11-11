@@ -8,17 +8,15 @@ import { ThemeProvider } from "styled-components";
 import "./styles/index.css";
 import "./styles/fonts.css";
 import "react-alice-carousel/lib/alice-carousel.css";
-
-//tmp
-import Loader from "./components/Loader";
+require("dotenv").config();
 
 const theme = () => ({
   colors: {
-    dark: "#0F1111",
+    dark: "#02020f",
     light: "#F5F5F5",
-    bck: "#FFFFFF",
+    bck: "#fffff7",
     extra: "green",
-    grey: "grey",
+    grey: "#727180",
   },
 });
 
@@ -32,3 +30,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+

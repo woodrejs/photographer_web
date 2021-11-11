@@ -1,103 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 //components
-import ImageGrideList from "../../components/ImageGrideList";
+import GridImagesList from "../../components/GridImagesList";
 import Title from "../../components/Title";
 import Transition from "../../components/Transition";
-
-//strapi db
-const photos = [
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "12",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "13",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "14",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "15",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "16",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "17",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "18",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "19",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "20",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "21",
-  },
-];
+import Loader from "../../components/Loader";
+//utils
+import { getSingle } from "../../utils/strapi";
+import { getRandomInt, getImageSize } from "../../utils/functions";
 
 export default function Single() {
-  let { title } = useParams();
+  //hooks
+  const [single, setSingle] = useState(null);
+  const { pathname } = useLocation();
+  const [_, singleName, singleId] = pathname.split("/");
+
+  useEffect(() => {
+    async function init() {
+      const { id, title, images, date } = await getSingle(singleName, singleId);
+
+      setSingle({
+        id,
+        title,
+        date,
+        images: images.map((image) => ({
+          title,
+          id: image.id,
+          width: getRandomInt(1, 3),
+          height: getRandomInt(1, 3),
+          src: getImageSize(image.src),
+        })),
+      });
+    }
+    init();
+  }, []);
+
+  if (!single)
+    return (
+      <Container>
+        <Loader />
+      </Container>
+    );
 
   return (
     <Container>
       <Transition />
-      <Header title={title} subTitle="27.12.1988" />
-      <ImageGrideList photos={photos} />
+      <Header title={single.title} subTitle={single.date} />
+      <GridImagesList photos={single.images} />
     </Container>
   );
 }
-
+//styles
 const Container = styled.div`
   order: 3;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 const Header = styled(Title)`
   height: 20vh;

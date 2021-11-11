@@ -3,16 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "appSlice",
   initialState: {
-    stage: "mounted",
+    sessions: {
+      list: [],
+      loaded: false,
+    },
+    publications: {
+      list: [],
+      loaded: false,
+    },
   },
   reducers: {
-    setStage(state, action) {
-      const { payload } = action;
+    setList(state, action) {
+      const [name, list] = action.payload;
 
-      state.stage = payload;
+      state[name].list = list;
+      state[name].loaded = true;
     },
+ 
   },
 });
 
-export const { setStage } = appSlice.actions;
+export const { setList, } = appSlice.actions;
 export default appSlice.reducer;

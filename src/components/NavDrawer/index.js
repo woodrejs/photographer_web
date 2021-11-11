@@ -37,7 +37,7 @@ const Container = styled.section`
   height: 100vh;
   width: 100vw;
   top: 0;
-  z-index: 100;
+  z-index: 300;
   position: fixed;
   transform: ${({ $isOpen }) => ($isOpen ? `translateX(0vw)` : `translateX(-100vw)`)};
   transition: ${({ $isOpen }) =>

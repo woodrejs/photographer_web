@@ -32,7 +32,7 @@ const data = [
   },
 ];
 
-export default function PublicationSection() {
+export default function PublicationSection({ list }) {
   //hooks
   const revealRefs = useRef([]);
   const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
@@ -46,7 +46,7 @@ export default function PublicationSection() {
 
   //effects
   useEffect(() => {
-    if (revealRefs.current.length === 4 && inView) {
+    if (inView) {
       gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
   }, [revealRefs.current, inView]);
@@ -57,14 +57,14 @@ export default function PublicationSection() {
         <Grid ref={ref}>
           <GridButton title="Publikacje" path="/publications" />
 
-          {data.map((item, index) => {
+          {list.map((item, index) => {
             if (index > 4) return null;
             return (
               <GridItem
                 index={index}
                 title={item.title}
-                path={`/session/${item.title}`}
-                url={item.url}
+                path={`/publications/${item.id}`}
+                url={item.src}
                 handler={handleRef}
                 key={item.id}
               />

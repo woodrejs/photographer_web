@@ -7,41 +7,7 @@ import ImageItem from "../../../../components/ImageItem";
 //utils
 import { vars } from "../../../../utils/vars";
 
-//tmp
-const data = [
-  {
-    id: 1,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    id: 2,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    id: 3,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    id: 4,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    id: 5,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-  {
-    id: 6,
-    title: "session name",
-    url: "https://images.unsplash.com/photo-1635807013473-95ee5fcb55ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-  },
-];
-
-export default function GridList() {
+export default function GridList({ list }) {
   //hooks
   const revealRefs = useRef([]);
   const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
@@ -52,28 +18,27 @@ export default function GridList() {
       revealRefs.current.push(el);
     }
   };
- 
 
   //effects
   useEffect(() => {
-    if (revealRefs.current.length === 6 && inView) {
+    if (inView) {
       gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
-  }, [revealRefs.current, inView]);
-
+  }, [revealRefs.current, inView, list]);
 
   return (
     <Container ref={ref}>
-      {data.map((item, index) => {
+      {list.map((item, index) => {
         if (index > 5) return null;
+
         return (
           <GridItem
+            key={item.id}
             index={index}
             title={item.title}
-            path={`/session/${item.title}`}
-            url={item.url}
+            path={`/sessions/${item.id}`}
+            url={item.src}
             handler={handleRef}
-            key={item.id}
           />
         );
       })}

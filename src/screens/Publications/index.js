@@ -1,63 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 //components
 import Title from "../../components/Title";
-import ImageGrideList from "../../components/ImageGrideList";
+import GridLinksList from "../../components/GridLinksList";
 import Transition from "../../components/Transition";
-
-//strapi db
-const photos = [
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "12",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "13",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "14",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "15",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 2,
-    height: 3,
-    key: "16",
-  },
-  {
-    title: "title",
-    src: "https://images.unsplash.com/photo-1634423623074-de676f545acd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-    width: 1,
-    height: 1,
-    key: "17",
-  },
-];
+import Loader from "../../components/Loader";
+//utils
+import { getList } from "../../utils/strapi";
+import { getRandomInt, getDevice } from "../../utils/functions";
 
 export default function Publications() {
+  //hooks
+  const [list, setList] = useState(null);
+
+  //effects
+  useEffect(() => {
+    async function init() {
+      const resp = await getList("publications");
+      const sessions = resp.map(({ id, date, title, src }) => ({
+        id,
+        title,
+        date,
+        src: getDevice() === "mobile" ? src.formats.small.url : src.formats.medium.url,
+        width: getRandomInt(1, 3),
+        height: getRandomInt(1, 3),
+      }));
+
+      setList(sessions);
+    }
+    init();
+  }, []);
+
+  if (!list) {
+    return (
+      <Container>
+        <Loader />
+      </Container>
+    );
+  }
+
   return (
     <Container>
       <Transition />
       <Header title="publikacje" />
-      <ImageGrideList isLink photos={photos} />
+      <GridLinksList photos={list} />
     </Container>
   );
 }
