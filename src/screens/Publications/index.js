@@ -7,7 +7,7 @@ import Transition from "../../components/Transition";
 import Loader from "../../components/Loader";
 //utils
 import { getList } from "../../utils/strapi";
-import { getRandomInt, getDevice } from "../../utils/functions";
+import {  getDevice, setDimension } from "../../utils/functions";
 
 export default function Publications() {
   //hooks
@@ -22,8 +22,8 @@ export default function Publications() {
         title,
         date,
         src: getDevice() === "mobile" ? src.formats.small.url : src.formats.medium.url,
-        width: getRandomInt(1, 3),
-        height: getRandomInt(1, 3),
+        width: setDimension(1),
+        height: setDimension(1),
       }));
 
       setList(sessions);
@@ -50,10 +50,9 @@ export default function Publications() {
 
 const Container = styled.div`
   order: 3;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 const Header = styled(Title)`
   height: 20vh;

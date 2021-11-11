@@ -8,7 +8,7 @@ import Transition from "../../components/Transition";
 import Loader from "../../components/Loader";
 //utils
 import { getSingle } from "../../utils/strapi";
-import { getRandomInt, getImageSize } from "../../utils/functions";
+import { getImageSize, setDimension } from "../../utils/functions";
 
 export default function Single() {
   //hooks
@@ -27,8 +27,8 @@ export default function Single() {
         images: images.map((image) => ({
           title,
           id: image.id,
-          width: getRandomInt(1, 3),
-          height: getRandomInt(1, 3),
+          width: setDimension(),
+          height: setDimension(),
           src: getImageSize(image.src),
         })),
       });
@@ -54,7 +54,7 @@ export default function Single() {
 //styles
 const Container = styled.div`
   order: 3;
-  min-height: 100vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
 `;

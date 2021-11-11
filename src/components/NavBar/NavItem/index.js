@@ -21,7 +21,7 @@ export default function NavItem({ title, path }) {
   }, [pathname]);
 
   return (
-    <Item onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <Item to={path} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Anchor to={path} children={title} $color={isActive || isOver} />
       <Line $scale={isActive || isOver} />
     </Item>
@@ -29,17 +29,18 @@ export default function NavItem({ title, path }) {
 }
 
 //styles
-const Item = styled.div`
+const Item = styled(NavLink)`
   line-height: 100%;
   padding: 10px 20px;
   cursor: pointer;
   display: none;
+  text-decoration: none;
 
   @media ${vars.device.tablet} {
     display: block;
   }
 `;
-const Anchor = styled(NavLink)`
+const Anchor = styled.span`
   font-size: 13px;
 
   font-weight: bold;

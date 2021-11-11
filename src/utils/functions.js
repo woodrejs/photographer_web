@@ -41,3 +41,8 @@ export function setColumns(isLink) {
 
   return isLink ? 1 : 2;
 }
+export function setDimension() {
+  if (getDevice() === "mobile") return 1;
+
+  return getRandomInt(1, 3);
+}

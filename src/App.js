@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 //screens
 import Home from "./screens/Home";
 import Publications from "./screens/Publications";
@@ -13,70 +12,80 @@ import Page404 from "./screens/404";
 import NavBar from "./components/NavBar";
 import NavDrawer from "./components/NavDrawer";
 import Footer from "./components/Footer";
-
-
-const routes = [
-  {
-    key: uuidv4(),
-    name: "Start",
-    path: "/",
-    element: <Home />,
-    exact: true,
-  },
-  {
-    key: uuidv4(),
-    name: "Portfolio",
-    path: "/portfolio",
-    element: <Portfolio />,
-    exact: true,
-  },
-  {
-    key: uuidv4(),
-    name: "Publications",
-    path: "/publications",
-    element: <Publications />,
-    exact: true,
-  },
-  {
-    key: uuidv4(),
-    name: "Session",
-    path: "/sessions/:title",
-    element: <Single />,
-    exact: true,
-  },
-  {
-    key: uuidv4(),
-    name: "Publication",
-    path: "publications/:title",
-    element: <Single />,
-    exact: true,
-  },
-  {
-    key: uuidv4(),
-    name: "About",
-    path: "/about",
-    element: <About />,
-    exact: false,
-  },
-  {
-    key: uuidv4(),
-    name: "Page404",
-    path: "*",
-    element: <Page404 />,
-    exact: false,
-  },
-];
+import Intro from "./components/Intro";
+//utils
+import { getList, getSlides } from "./utils/strapi";
+import { getImageSize } from "./utils/functions";
 
 export default function App() {
+  //hooks
+  const [lists, setLists] = useState({
+    slides: null,
+    publications: null,
+    portfolio: null,
+  });
+
+  useEffect(() => {
+    async function init() {
+      const tmp = { ...lists };
+
+      if (!tmp.portfolio) {
+        const resp = await getList("sessions");
+        resp.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const data = resp.map(({ id, title, date, src }) => ({
+          id,
+          title,
+          date,
+          src: getImageSize(src),
+        }));
+
+        tmp.portfolio = data;
+      }
+      if (!tmp.publications) {
+        const resp = await getList("publications");
+        resp.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const data = resp.map(({ id, title, date, src }) => ({
+          id,
+          title,
+          date,
+          src: getImageSize(src),
+        }));
+
+        tmp.publications = data;
+      }
+      if (!tmp.slides) {
+        const resp = await getSlides();
+
+        const data = resp.map(({ id, src }) => ({
+          id,
+          src: getImageSize(src),
+        }));
+
+        tmp.slides = data;
+      }
+
+      if (!lists.portfolio || !lists.publications || !lists.slides) {
+        setLists(tmp);
+      }
+    }
+    init();
+  });
+
+  if (!lists.portfolio || !lists.publications || !lists.slides) return <Intro />;
+
   return (
     <Container>
       <Router>
         <NavBar />
         <NavDrawer />
         <Routes>
-          {routes.map(({ path, element, key, exact }) => (
-            <Route key={key} path={path} exact={exact} element={element} />
-          ))}
+          <Route path={"/"} element={<Home lists={lists} />} exact />
+          <Route path={"/portfolio"} element={<Portfolio />} exact />
+          <Route path={"/publications"} element={<Publications />} exact />
+          <Route path={"/sessions/:title"} element={<Single />} exact />
+          <Route path={"/publications/:title"} element={<Single />} exact />
+          <Route path={"/about"} element={<About />} />
+          <Route path={"*"} element={<Page404 />} />
         </Routes>
         <Footer />
       </Router>
@@ -93,4 +102,6 @@ const Container = styled.main`
 
   display: flex;
   flex-direction: column;
+
+  background-color: ${({ theme }) => theme.colors.bck};
 `;

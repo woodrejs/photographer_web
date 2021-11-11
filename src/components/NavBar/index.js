@@ -55,10 +55,14 @@ const StickyBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.bck};
+
+  padding: ${({ $isSticky }) => ($isSticky ? "5px 0" : "0")};
+
   top: 0;
   z-index: 200;
   position: ${({ $isSticky }) => ($isSticky ? "fixed" : "block")};
+  background-color: ${({ theme, $isSticky }) =>
+    $isSticky ? theme.colors.light : theme.colors.bck};
   position: ${({ $isSticky }) => $isSticky && vars.shadow};
 `;
 const Box = styled.nav`
