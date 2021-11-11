@@ -18,6 +18,8 @@ export default function Carousel({ list }) {
     gsap.to(ref.current, { opacity: 1, ease: "power2", y: -15 });
   }, []);
 
+  if (!list.length) return null;
+
   return (
     <Container ref={ref}>
       <Box>

@@ -18,7 +18,7 @@ export default function NavItem({ title, path }) {
   useEffect(() => {
     setIsActive(checkIsActive(pathname, path));
     setIsOver(false);
-  }, [pathname]);
+  }, [pathname, path]);
 
   return (
     <Item to={path} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

@@ -10,7 +10,7 @@ import { vars } from "../../../../utils/vars";
 export default function GridList({ list }) {
   //hooks
   const revealRefs = useRef([]);
-  const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
 
   //handlers
   const handleRef = (el) => {
@@ -24,7 +24,7 @@ export default function GridList({ list }) {
     if (inView) {
       gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
-  }, [revealRefs.current, inView, list]);
+  }, [inView, list]);
 
   return (
     <Container ref={ref}>

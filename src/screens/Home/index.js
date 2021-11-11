@@ -10,6 +10,7 @@ import Loader from "../../components/Loader";
 export default function Home({ lists }) {
   if (!lists.portfolio || !lists.publications || !lists.slides) return <Loader />;
 
+  
   return (
     <Container>
       <Transition />

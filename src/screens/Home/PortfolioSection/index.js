@@ -6,6 +6,8 @@ import GridList from "./GridList";
 //utils
 
 export default function PortfolioSection({ list }) {
+  if (!list.length) return null;
+
   return (
     <Container>
       <Box>

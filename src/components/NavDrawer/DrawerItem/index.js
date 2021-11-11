@@ -25,7 +25,7 @@ export default function DrawerItem({ title, path }) {
   useEffect(() => {
     setIsActive(checkIsActive(pathname, path));
     setIsOver(false);
-  }, [pathname]);
+  }, [pathname, path]);
 
   return (
     <Item

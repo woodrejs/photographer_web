@@ -41,7 +41,7 @@ export default function GridItem({ photo, handler, top, left, badge = null }) {
     if (inView) {
       gsap.to(entry.target, { opacity: 1, ease: "power2", y: -15 });
     }
-  }, [inView]);
+  }, [inView, entry.target]);
 
   return (
     <Container
