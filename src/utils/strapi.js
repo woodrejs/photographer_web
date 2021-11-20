@@ -19,7 +19,6 @@ export async function getList(name) {
         `,
     },
   });
-
   return resp.data.data[name];
 }
 export async function getSingle(name, id) {

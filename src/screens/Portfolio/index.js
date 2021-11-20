@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 //components
 import Title from "../../components/Title";
 import GridLinksList from "../../components/GridLinksList";
@@ -7,27 +8,42 @@ import Transition from "../../components/Transition";
 import Loader from "../../components/Loader";
 //utils
 import { getList } from "../../utils/strapi";
-import {  getDevice, setDimension } from "../../utils/functions";
+import { setImageThumbSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
+import { setError } from "../../redux/app.slice";
 
 export default function Portfolio() {
   //hooks
+  const dispatch = useDispatch();
   const [list, setList] = useState(null);
 
   //effects
   useEffect(() => {
     async function init() {
-      const resp = await getList("sessions");
-      const sessions = resp.map(({ id, date, title, src }) => ({
-        id,
-        title,
-        date,
-        src: getDevice() === "mobile" ? src.formats.small.url : src.formats.medium.url,
-        width: setDimension(),
-        height: setDimension(),
-      }));
+      try {
+        const resp = await getList("sessions");
+        const sessions = resp.map((photo) => {
+          const { id, date, title, src } = photo;
+          const { width, height } = setDimensions(src);
 
-      setList(sessions);
+          return {
+            id,
+            title,
+            date,
+            src: setImageThumbSrc(src),
+            width,
+            height,
+            placeholder: setLeastImageSrc(src),
+          };
+        });
+
+        setList(sessions);
+      } catch (error) {
+        dispatch(
+          setError([true, "Nie udało się pobrać wszystkich sesji. Spróbuj ponownie."])
+        );
+      }
     }
+
     init();
   }, []);
 
@@ -35,6 +51,16 @@ export default function Portfolio() {
     return (
       <Container>
         <Loader />
+      </Container>
+    );
+  }
+
+  if (!list.length) {
+    return (
+      <Container>
+        <Box>
+          <Message>W tej chwili nie ma żadnych sesji :(</Message>
+        </Box>
       </Container>
     );
   }
@@ -57,4 +83,14 @@ const Container = styled.div`
 `;
 const Header = styled(Title)`
   height: 20vh;
+`;
+const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+const Message = styled.h4`
+  margin-bottom: 15vh;
+  color: ${({ theme }) => theme.colors.dark};
 `;

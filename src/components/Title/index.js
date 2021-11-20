@@ -31,7 +31,7 @@ const Box = styled.section`
 const MainTitle = styled.h1`
   font-weight: bold;
   font-size: 36px;
-  text-justify: center;
+  text-align: center;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.dark};
 `;

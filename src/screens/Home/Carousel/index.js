@@ -43,7 +43,9 @@ export default function Carousel({ list }) {
 }
 //functions
 function setImages(arr) {
-  return arr.map((item) => <Slide url={item.src} key={item.id} />);
+  return arr.map((item) => (
+    <Slide url={item.src} placeholder={item.placeholder} key={item.id} />
+  ));
 }
 //styles
 const Container = styled.div`
@@ -59,6 +61,8 @@ const Box = styled.section`
   width: 100%;
   ${vars.shadow}
   position: relative;
+  overflow: hidden;
+  height: 70vh;
 `;
 const MaskBox = styled.div`
   position: absolute;

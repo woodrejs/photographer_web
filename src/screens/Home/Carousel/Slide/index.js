@@ -1,19 +1,28 @@
 import React from "react";
 import styled from "styled-components";
+import LazyImage from "react-lazy-blur-image";
 
-export default function Slide({ url }) {
+export default function Slide({ url, placeholder }) {
   //handlers
   const handleDragStart = (e) => e.preventDefault();
 
-  return <Image onDragStart={handleDragStart} role="presentation" url={url} />;
+  return (
+    <LazyImage
+      placeholder={placeholder}
+      uri={url}
+      render={(src, style) => (
+        <Image
+          src={src}
+          style={style}
+          onDragStart={handleDragStart}
+          role="presentation"
+        />
+      )}
+    />
+  );
 }
 //styles
-const Image = styled.figure`
+const Image = styled.img`
   width: 100%;
-  height: 70vh;
-
-  background-image: ${({ url }) => `url(${url})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  min-height: 70vh;
 `;

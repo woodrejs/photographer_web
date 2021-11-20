@@ -31,6 +31,7 @@ const Container = styled.figure`
   align-items: center;
   display: block;
 
+  z-index: 999999;
   @media ${vars.device.tablet} {
     display: none;
   }

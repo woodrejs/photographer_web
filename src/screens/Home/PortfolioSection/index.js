@@ -4,8 +4,9 @@ import styled from "styled-components";
 import ButtonLink from "../../../components/ButtonLink";
 import GridList from "./GridList";
 //utils
+import { vars } from "../../../utils/vars";
 
-export default function PortfolioSection({ list }) {
+export default React.memo(function PortfolioSection({ list }) {
   if (!list.length) return null;
 
   return (
@@ -16,7 +17,7 @@ export default function PortfolioSection({ list }) {
       </Box>
     </Container>
   );
-}
+});
 //styles
 const Container = styled.div`
   width: 100%;
@@ -29,7 +30,11 @@ const Container = styled.div`
 const Box = styled.section`
   max-width: 1366px;
   width: 100%;
-
   display: flex;
   flex-direction: column;
+  padding: 0 20px;
+
+  @media ${vars.device.tablet} {
+    padding: 0;
+  }
 `;

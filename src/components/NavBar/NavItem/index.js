@@ -51,7 +51,7 @@ const Anchor = styled.span`
 const Line = styled.div`
   background-color: ${({ theme }) => theme.colors.dark};
   margin-top: 2px;
-  height: 2px;
+  height: 1px;
   width: 100%;
 
   transform-origin: left;

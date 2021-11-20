@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import LazyImage from "react-lazy-blur-image";
 import gsap from "gsap";
 //components
 import Title from "../../components/Title";
@@ -21,10 +22,18 @@ export default function About() {
       <Transition />
       <Header title="o mnie" />
       <Box>
-        <Image
-          ref={ref}
-          url="https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-        />
+        <ImageBox ref={ref}>
+          <LazyImage
+            placeholder={
+              "https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+            }
+            uri={
+              "https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
+            }
+            render={(src, style) => <Image src={src} style={style} />}
+          />
+        </ImageBox>
+
         <Text>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
           Ipsum has been the industry's standard dummy text ever since the 1500s, when an
@@ -65,17 +74,17 @@ const Box = styled.section`
 const Header = styled(Title)`
   height: 20vh;
 `;
-const Image = styled.figure`
+const ImageBox = styled.div`
   width: 100%;
   height: 60vh;
   ${vars.shadow}
-  background-image: ${({ url }) => `url(${url})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+  overflow: hidden;
   opacity: 0;
   transform: translateY(15px);
+`;
+const Image = styled.img`
+  width: 100%;
+  min-height: 100%;
 `;
 const Text = styled.p`
   color: ${({ theme }) => theme.colors.dark};

@@ -1,11 +1,21 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import LazyImage from "react-lazy-blur-image";
 import gsap from "gsap";
+//components
+import Badge from "../Badge";
 //utils
 import { vars } from "../../utils/vars";
 
-export default function ImageItem({ url, title, path, className, handler = null }) {
+export default function ImageItem({
+  url,
+  title,
+  path,
+  className,
+  handler = null,
+  placeholder,
+}) {
   //hooks
   const ref = useRef(null);
 
@@ -33,12 +43,17 @@ export default function ImageItem({ url, title, path, className, handler = null 
     <Container className={className} ref={handler}>
       <Box
         to={path}
-        url={url}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={ref}
-      ></Box>
-      <Title children={title} />
+      >
+        <LazyImage
+          placeholder={placeholder}
+          uri={url}
+          render={(src, style) => <Image src={src} style={style} />}
+        />
+      </Box>
+      <Badge title={title} />
     </Container>
   );
 }
@@ -57,24 +72,14 @@ const Container = styled.div`
 `;
 const Box = styled(NavLink)`
   flex: 1;
-  background-image: ${({ url }) => `url(${url})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
   position: relative;
   transform-origin: center;
-`;
-const Title = styled.div`
-  position: absolute;
-  top: 10px;
-  right: -20px;
-  font-size: 12px;
-  transform: rotateZ(90deg);
-  transform-origin: left;
-  padding: 2px 5px;
-  text-transform: capitalize;
-  color: ${({ theme }) => theme.colors.dark};
 
-  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Image = styled.img`
+  width: 100%;
+  min-height: 100%;
 `;

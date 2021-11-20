@@ -36,7 +36,7 @@ export default function PublicationSection({ list }) {
           <GridButton title="Publikacje" path="/publications" />
 
           {list.map((item, index) => {
-            if (index > 4) return null;
+            if (index > 3) return null;
             return (
               <GridItem
                 index={index}
@@ -45,6 +45,7 @@ export default function PublicationSection({ list }) {
                 url={item.src}
                 handler={handleRef}
                 key={item.id}
+                placeholder={item.placeholder}
               />
             );
           })}

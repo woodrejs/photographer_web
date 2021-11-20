@@ -15,8 +15,8 @@ export default function Footer() {
         <BottomBar>
           <Address>
             <Title>kontakt:</Title>
-            <Details>+48531892218</Details>
-            <Details>kontakt@gmail.com</Details>
+            <Details>+48 733783939</Details>
+            <Details>agapodofotografie@gmail.com</Details>
           </Address>
           <Aside>
             <Icon src={copyright_icon} alt="copyright_icon" />
@@ -36,13 +36,17 @@ const Container = styled.div`
   justify-content: center;
 `;
 const Box = styled.section`
-  height: 25vh;
+  height: 35vh;
   width: 100%;
   max-width: 1366px;
   padding: 0 20px;
 
   display: flex;
   flex-direction: column;
+
+  @media ${vars.device.tablet} {
+    height: 25vh;
+  }
 `;
 const BottomBar = styled.div`
   min-height: 5vh;
@@ -62,6 +66,13 @@ const Address = styled.address`
 
   color: ${({ theme }) => theme.colors.light};
   font-size: 14px;
+
+  flex-direction: column;
+  padding: 20px 0;
+  @media ${vars.device.tablet} {
+    flex-direction: row;
+    padding: 0;
+  }
 `;
 const Aside = styled.div`
   display: flex;

@@ -1,22 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
+import LazyImage from "react-lazy-blur-image";
 import gsap from "gsap";
+//components
+import Badge from "../Badge";
 //utils
 import { vars } from "../../utils/vars";
 
 export default function GridItem({ photo, handler, top, left, badge = null }) {
   //hooks
-  const [isSelected, setIsSelected] = useState(false);
   const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
   const imageRef = useRef(null);
 
-  //handlers
-  const handleOnClick = () => {
-    setIsSelected(!isSelected);
-    handler();
-  };
-  //handlers
+  //   //handlers
+  const handleOnClick = () => handler();
   const handleMouseEnter = () => {
     gsap.to(imageRef.current, {
       duration: 0.3,
@@ -36,26 +34,33 @@ export default function GridItem({ photo, handler, top, left, badge = null }) {
     });
   };
 
-  //effects
+  //   //effects
   useEffect(() => {
     if (inView) {
       gsap.to(entry.target, { opacity: 1, ease: "power2", y: -15 });
     }
-  }, [inView, entry.target]);
+  }, [inView, entry]);
 
   return (
     <Container
-      height={photo.height}
-      width={photo.width}
+      ref={ref}
       left={left}
       top={top}
-      ref={ref}
+      height={photo.height}
+      width={photo.width}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <Badge>{badge ?? photo.title}</Badge>
       <Box>
-        <Image onClick={handleOnClick} photo={photo} ref={imageRef} />
+        <Badge title={badge ?? photo.title} />
+
+        <LazyImage
+          placeholder={photo.placeholder}
+          uri={photo.src}
+          render={(src, style) => (
+            <img {...photo} ref={imageRef} onClick={handleOnClick} style={style} />
+          )}
+        />
       </Box>
     </Container>
   );
@@ -68,38 +73,15 @@ const Container = styled.div`
   height: ${({ height }) => `${height}px`};
   width: ${({ width }) => `${width}px`};
   cursor: pointer;
+  overflow: hidden;
+  transform-origin: center;
+
   padding: 10px;
-  opacity: 0;
-  transform: translateY(15px);
 `;
 const Box = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.dark};
-`;
-const Image = styled.div`
-  height: 100%;
-  width: 100%;
-
-  background-image: ${({ photo }) => `url(${photo.src})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
   ${vars.shadow}
 `;
-const Badge = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 0px;
-  font-size: 12px;
-  transform: rotateZ(90deg);
-  transform-origin: left;
-  padding: 2px 5px;
-  text-transform: capitalize;
-  color: ${({ theme }) => theme.colors.dark};
-
-  background-color: rgba(255, 255, 255, 0.2);
-  z-index: 100;
-`;
+const Image = styled.img``;

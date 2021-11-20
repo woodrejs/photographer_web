@@ -7,7 +7,7 @@ import ImageItem from "../../../../components/ImageItem";
 //utils
 import { vars } from "../../../../utils/vars";
 
-export default function GridList({ list }) {
+export default React.memo(function GridList({ list }) {
   //hooks
   const revealRefs = useRef([]);
   const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
@@ -39,22 +39,22 @@ export default function GridList({ list }) {
             path={`/sessions/${item.id}`}
             url={item.src}
             handler={handleRef}
+            placeholder={item.placeholder}
           />
         );
       })}
     </Container>
   );
-}
+});
 
 //styles
 const Container = styled.div`
   width: 100%;
-  height: 250vh;
 
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: repeat(6, calc(100vw - 60px));
   padding: 0;
 
   @media ${vars.device.tablet} {
