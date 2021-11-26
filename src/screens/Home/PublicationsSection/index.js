@@ -125,6 +125,8 @@ const GridItem = styled(ImageItem)`
   width: 100%;
   height: 100%;
   opacity: ${({ device }) => (device === "mobile" ? 1 : 0)};
+  transform: ${({ device }) =>
+    device === "mobile" ? "translateY(0px)" : "translateY(15px)"};
   ${(props) => generateStyle(props.index)};
 `;
 const Text = styled.p`

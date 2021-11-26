@@ -72,11 +72,15 @@ const Container = styled.div`
     grid-template-rows: repeat(3, 1fr);
   }
 `;
+// transform: translateY(15px);
 const GridItem = styled(ImageItem)`
   width: 100%;
   height: 100%;
   opacity: ${({ device }) => (device === "mobile" ? 1 : 0)};
-    ${(props) => generateStyle(props.index)};
+  transform: ${({ device }) =>
+    device === "mobile" ? "translateY(0px)" : "translateY(15px)"};
+
+  ${(props) => generateStyle(props.index)};
 `;
 //functions
 function generateStyle(index) {

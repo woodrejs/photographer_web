@@ -26,7 +26,7 @@ export default React.memo(function Footer() {
       </Box>
     </Container>
   );
-})
+});
 
 const Container = styled.div`
   order: 4;
@@ -100,4 +100,5 @@ const Title = styled.h5`
 const Details = styled.span`
   margin-right: 10px;
   font-weight: bold;
+  font-style: normal;
 `;
