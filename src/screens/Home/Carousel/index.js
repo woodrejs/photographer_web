@@ -9,19 +9,11 @@ import { vars } from "../../../utils/vars";
 //assets
 import scroll_icon from "./scroll_icon.svg";
 
-export default function Carousel({ list }) {
-  //hooks
-  const ref = useRef(null);
-
-  //effects
-  useEffect(() => {
-    gsap.to(ref.current, { opacity: 1, ease: "power2", y: -15 });
-  }, []);
-
+export default React.memo(function Carousel({ list }) {
   if (!list.length) return null;
 
   return (
-    <Container ref={ref}>
+    <Container>
       <Box>
         <MaskBox>
           <Mask />
@@ -40,7 +32,7 @@ export default function Carousel({ list }) {
       </Box>
     </Container>
   );
-}
+});
 //functions
 function setImages(arr) {
   return arr.map((item) => (
@@ -52,9 +44,6 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-
-  opacity: 0;
-  transform: translateY(15px);
 `;
 const Box = styled.section`
   max-width: 1366px;

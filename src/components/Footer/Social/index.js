@@ -3,9 +3,9 @@ import styled from "styled-components";
 //components
 import SocialButton from "./SocialButton";
 //assets
-import Logo_dark from "./logo_dark.svg";
+import Logo_dark from "../../../assets/logo_light.jpg";
 
-export default function Social() {
+export default React.memo(function Social() {
   return (
     <Container>
       <Box>
@@ -21,7 +21,7 @@ export default function Social() {
       </Box>
     </Container>
   );
-}
+})
 //styles
 const Container = styled.div`
   flex: 1;
@@ -35,4 +35,5 @@ const Box = styled.section`
 `;
 const Logo = styled.img`
   margin: 0 25px;
+  height: 60px;
 `;

@@ -8,7 +8,7 @@ import Badge from "../Badge";
 //utils
 import { vars } from "../../utils/vars";
 
-export default function ImageItem({
+export default React.memo(function ImageItem({
   url,
   title,
   path,
@@ -56,7 +56,7 @@ export default function ImageItem({
       <Badge title={title} />
     </Container>
   );
-}
+});
 
 //styles
 const Container = styled.div`

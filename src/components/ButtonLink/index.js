@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export default function ButtonLink({ title, path, className }) {
+export default React.memo(function ButtonLink({ title, path, className }) {
   //hooks
   const [isActive, setIsActive] = useState(true);
 
@@ -20,7 +20,7 @@ export default function ButtonLink({ title, path, className }) {
       </Box>
     </Container>
   );
-}
+})
 
 //styles
 const Container = styled.div`

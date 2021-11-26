@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Title({ title, subTitle, className }) {
+export default React.memo(function Title({ title, subTitle, className }) {
   return (
     <Container className={className}>
       <Box>
@@ -10,7 +10,7 @@ export default function Title({ title, subTitle, className }) {
       </Box>
     </Container>
   );
-}
+});
 
 //styles
 const Container = styled.div`
@@ -37,7 +37,7 @@ const MainTitle = styled.h1`
 `;
 const SubTitle = styled.span`
   font-size: 16px;
-  text-justify: center;
+  text-align: center;
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.grey};
 `;

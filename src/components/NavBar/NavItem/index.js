@@ -5,7 +5,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { vars } from "../../../utils/vars";
 import { checkIsActive } from "../../../utils/functions";
 
-export default function NavItem({ title, path }) {
+export default React.memo(function NavItem({ title, path }) {
   //hooks
   const { pathname } = useLocation();
   const [isActive, setIsActive] = useState(checkIsActive(pathname, path));
@@ -26,7 +26,7 @@ export default function NavItem({ title, path }) {
       <Line $scale={isActive || isOver} />
     </Item>
   );
-}
+})
 
 //styles
 const Item = styled(NavLink)`

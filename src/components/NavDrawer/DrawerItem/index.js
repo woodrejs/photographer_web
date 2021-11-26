@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { checkIsActive } from "../../../utils/functions";
 import { setIsOpen } from "../../../redux/nav.slice";
 
-export default function DrawerItem({ title, path }) {
+export default React.memo(function DrawerItem({ title, path }) {
   //hooks
   const { pathname } = useLocation();
   const [isActive, setIsActive] = useState(checkIsActive(pathname, path));
@@ -36,7 +36,7 @@ export default function DrawerItem({ title, path }) {
       <Anchor children={title} $color={isActive || isOver} />
     </Item>
   );
-}
+});
 //styles
 const Item = styled.div`
   padding: 20px 0;

@@ -11,7 +11,7 @@ import { getList } from "../../utils/strapi";
 import { setImageThumbSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
 import { setError } from "../../redux/app.slice";
 
-export default function Portfolio() {
+export default React.memo(function Portfolio() {
   //hooks
   const dispatch = useDispatch();
   const [list, setList] = useState(null);
@@ -72,7 +72,7 @@ export default function Portfolio() {
       <GridLinksList photos={list} />
     </Container>
   );
-}
+});
 //styles
 const Container = styled.div`
   order: 3;
@@ -83,6 +83,7 @@ const Container = styled.div`
 `;
 const Header = styled(Title)`
   height: 20vh;
+  margin-bottom: 4vh;
 `;
 const Box = styled.div`
   display: flex;

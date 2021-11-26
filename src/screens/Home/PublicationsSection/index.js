@@ -7,11 +7,13 @@ import ButtonLink from "../../../components/ButtonLink";
 import ImageItem from "../../../components/ImageItem";
 //utils
 import { vars } from "../../../utils/vars";
+import { getDevice } from "../../../utils/functions";
 
-export default function PublicationSection({ list }) {
+export default React.memo(function PublicationSection({ list }) {
   //hooks
   const revealRefs = useRef([]);
-  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
+  const device = getDevice();
 
   //handlers
   const handleRef = (el) => {
@@ -22,7 +24,7 @@ export default function PublicationSection({ list }) {
 
   //effects
   useEffect(() => {
-    if (inView) {
+    if (inView && device !== "mobile") {
       gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
   }, [inView]);
@@ -46,25 +48,33 @@ export default function PublicationSection({ list }) {
                 handler={handleRef}
                 key={item.id}
                 placeholder={item.placeholder}
+                device={device}
               />
             );
           })}
 
           <Text>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+            Publikacje ukazały się w magazynach między innymi w Niemczech, Wielkiej
+            Brytanii, Francji, Holandii jak i w magazynach międzynarodowych lub magazynach
+            online.
           </Text>
         </Grid>
       </Box>
     </Container>
   );
-}
+});
 
 //styles
 const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
+  padding-bottom: 10vh;
+
+  @media ${vars.device.desktop} {
+    padding-bottom: 0;
+  }
 `;
 const Box = styled.section`
   max-width: 1366px;
@@ -114,7 +124,7 @@ const GridButton = styled(ButtonLink)`
 const GridItem = styled(ImageItem)`
   width: 100%;
   height: 100%;
-
+  opacity: ${({ device }) => (device === "mobile" ? 1 : 0)};
   ${(props) => generateStyle(props.index)};
 `;
 const Text = styled.p`
@@ -124,11 +134,13 @@ const Text = styled.p`
 
   font-size: 14px;
   color: ${({ theme }) => theme.colors.dark};
+  padding-top: 3vh;
 
   @media ${vars.device.tablet} {
     align-self: end;
     grid-row: 5/6;
     grid-column: 2/3;
+    padding-top: 0;
   }
   @media ${vars.device.desktop} {
     grid-row: 4/5;

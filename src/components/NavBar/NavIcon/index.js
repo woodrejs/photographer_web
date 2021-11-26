@@ -7,7 +7,7 @@ import hamburger_icon from "./hamburger_icon.svg";
 import { vars } from "../../../utils/vars";
 import { setIsOpen } from "../../../redux/nav.slice";
 
-export default function NavIcon() {
+export default React.memo(function NavIcon() {
   //hooks
   const dispatch = useDispatch();
   const { isOpen } = useSelector(({ navSlice }) => navSlice);
@@ -20,7 +20,7 @@ export default function NavIcon() {
       <Image src={hamburger_icon} />
     </Container>
   );
-}
+})
 
 const Container = styled.figure`
   cursor: pointer;

@@ -7,7 +7,7 @@ import copyright_icon from "./copyright_icon.svg";
 //utils
 import { vars } from "../../utils/vars";
 
-export default function Footer() {
+export default React.memo(function Footer() {
   return (
     <Container>
       <Box>
@@ -26,7 +26,7 @@ export default function Footer() {
       </Box>
     </Container>
   );
-}
+})
 
 const Container = styled.div`
   order: 4;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function SocialButton({ url, title }) {
+export default React.memo(function SocialButton({ url, title }) {
   //hooks
   const [isActive, setIsActive] = useState(true);
 
@@ -15,7 +15,7 @@ export default function SocialButton({ url, title }) {
       <Line $isActive={isActive} />
     </Container>
   );
-}
+})
 
 const Container = styled.div`
   display: flex;

@@ -6,11 +6,13 @@ import { useInView } from "react-intersection-observer";
 import ImageItem from "../../../../components/ImageItem";
 //utils
 import { vars } from "../../../../utils/vars";
+import { getDevice } from "../../../../utils/functions";
 
 export default React.memo(function GridList({ list }) {
   //hooks
   const revealRefs = useRef([]);
-  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
+  const device = getDevice();
 
   //handlers
   const handleRef = (el) => {
@@ -21,7 +23,7 @@ export default React.memo(function GridList({ list }) {
 
   //effects
   useEffect(() => {
-    if (inView) {
+    if (inView && device !== "mobile") {
       gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
     }
   }, [inView, list]);
@@ -40,6 +42,7 @@ export default React.memo(function GridList({ list }) {
             url={item.src}
             handler={handleRef}
             placeholder={item.placeholder}
+            device={device}
           />
         );
       })}
@@ -72,8 +75,8 @@ const Container = styled.div`
 const GridItem = styled(ImageItem)`
   width: 100%;
   height: 100%;
-
-  ${(props) => generateStyle(props.index)};
+  opacity: ${({ device }) => (device === "mobile" ? 1 : 0)};
+    ${(props) => generateStyle(props.index)};
 `;
 //functions
 function generateStyle(index) {

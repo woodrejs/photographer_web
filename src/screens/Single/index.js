@@ -11,6 +11,7 @@ import Loader from "../../components/Loader";
 import { getSingle } from "../../utils/strapi";
 import { setImageSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
 import { setError } from "../../redux/app.slice";
+import { vars } from "../../utils/vars";
 
 export default function Single() {
   //hooks
@@ -83,6 +84,7 @@ const Container = styled.div`
 `;
 const Header = styled(Title)`
   height: 20vh;
+  margin-bottom: 4vh;
 `;
 const Box = styled.div`
   display: flex;

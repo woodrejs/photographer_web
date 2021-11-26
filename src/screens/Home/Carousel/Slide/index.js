@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import LazyImage from "react-lazy-blur-image";
+import { vars } from "../../../../utils/vars";
 
-export default function Slide({ url, placeholder }) {
+export default React.memo(function Slide({ url, placeholder }) {
   //handlers
   const handleDragStart = (e) => e.preventDefault();
 
@@ -20,9 +21,13 @@ export default function Slide({ url, placeholder }) {
       )}
     />
   );
-}
+});
 //styles
 const Image = styled.img`
-  width: 100%;
-  min-height: 70vh;
+  width: 200%;
+  min-height: unset;
+  @media ${vars.device.tablet} {
+    width: 100%;
+    min-height: 75vh;
+  }
 `;

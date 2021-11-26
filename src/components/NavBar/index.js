@@ -7,7 +7,7 @@ import NavIcon from "./NavIcon";
 //utils
 import { vars } from "../../utils/vars";
 
-export default function NavBar() {
+export default React.memo(function NavBar() {
   //hooks
   const [isSticky, setIsSticky] = useState(false);
 
@@ -35,7 +35,7 @@ export default function NavBar() {
       </StickyBox>
     </Container>
   );
-}
+})
 
 //styles
 const Container = styled.section`

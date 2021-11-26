@@ -7,10 +7,28 @@ import Title from "../../components/Title";
 import Transition from "../../components/Transition";
 //utils
 import { vars } from "../../utils/vars";
+import { getDevice } from "../../utils/functions";
+//assets
+import sm_img from "./about_767.jpg";
+import md_img from "./about_991.jpg";
+import lg_img from "./about_1366.jpg";
 
-export default function About() {
+export default React.memo(function About() {
   //hooks
   const ref = useRef(null);
+
+  const getSrc = () => {
+    switch (getDevice()) {
+      case "mobile":
+        return sm_img;
+      case "tablet":
+        return md_img;
+      case "desktop":
+        return lg_img;
+    }
+  };
+
+  console.log(getSrc());
 
   //effects
   useEffect(() => {
@@ -24,37 +42,27 @@ export default function About() {
       <Box>
         <ImageBox ref={ref}>
           <LazyImage
-            placeholder={
-              "https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-            }
-            uri={
-              "https://images.unsplash.com/photo-1438109491414-7198515b166b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-            }
+            placeholder={sm_img}
+            uri={getSrc()}
             render={(src, style) => <Image src={src} style={style} />}
           />
         </ImageBox>
 
         <Text>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-          Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-          unknown printer took a galley of type and scrambled it to make a type specimen
-          book. It has survived not only five centuries, but also the leap into electronic
-          typesetting, remaining essentially unchanged. It was popularised in the 1960s
-          with the release of Letraset sheets containing Lorem Ipsum passages, and more
-          recently with desktop publishing software like Aldus PageMaker including
-          versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-          typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-          ever since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only five
-          centuries, but also the leap into electronic typesetting, remaining essentially
-          unchanged. It was popularised in the 1960s with the release of Letraset sheets
-          containing Lorem Ipsum passages, and more recently with desktop publishing
-          software like Aldus PageMaker including versions of Lorem Ipsum.
+          Hej! Miło mi, że tu jesteś. Mam na imię Aga i kocham piękne kadry.
+          <br />
+          <br />
+          Jestem fotografem z zamiłowaniem do portretów a swoją przygodę z fotografią
+          zaczęłam kilkanaście lat temu. Obecnie realizuję się w stylizowanych sesjach
+          modowych, ale nie straszne mi też zdjęcia spontaniczne i naturalne. Dzięki tym
+          skrajnościom mogę uchwycić charakter modela i uzyskać ciekawe efekty. Pasjonują
+          mnie przedmioty i moda vintage, które również wykorzystuję w sesjach
+          zdjęciowych. Jeśli podoba Ci się moja stylistyka, zapraszam do kontaktu.
         </Text>
       </Box>
     </Container>
   );
-}
+});
 
 //styles
 const Container = styled.div`

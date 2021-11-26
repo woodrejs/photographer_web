@@ -7,7 +7,7 @@ import DrawerItem from "./DrawerItem";
 import { vars } from "../../utils/vars";
 import { setIsOpen } from "../../redux/nav.slice";
 
-export default function NavDrawer() {
+export default React.memo(function NavDrawer() {
   //hooks
   const { isOpen } = useSelector(({ navSlice }) => navSlice);
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function NavDrawer() {
       </Box>
     </Container>
   );
-}
+})
 //styles
 const Container = styled.section`
   order: 2;

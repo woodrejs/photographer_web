@@ -3,7 +3,7 @@ import styled from "styled-components";
 //components
 import RotateLoader from "react-spinners/RotateLoader";
 
-export default function Loader() {
+export default React.memo(function Loader() {
   return (
     <Container>
       <Box>
@@ -11,7 +11,7 @@ export default function Loader() {
       </Box>
     </Container>
   );
-}
+})
 
 const Container = styled.section`
   flex: 1;
@@ -20,5 +20,6 @@ const Container = styled.section`
   align-items: center;
 `;
 
-const Box = styled.section``;
-
+const Box = styled.section`
+  margin-bottom: 15vh;
+`;

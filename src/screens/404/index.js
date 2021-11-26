@@ -4,14 +4,14 @@ import styled from "styled-components";
 import Title from "../../components/Title";
 import Transition from "../../components/Transition";
 
-export default function Page404() {
+export default React.memo(function Page404() {
   return (
     <Container>
       <Transition />
       <Header title="Page404" subTitle="nie ma takiej strony :(" />
     </Container>
   );
-}
+})
 
 const Container = styled.div`
   order: 3;
