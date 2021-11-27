@@ -21,7 +21,6 @@ const Container = styled.figure``;
 const Anchor = styled(NavLink)``;
 const Image = styled.img`
   height: 50px;
-  width: 100%;
 
   @media ${vars.device.tablet} {
     height: 55px;
