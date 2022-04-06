@@ -15,7 +15,6 @@ export default React.memo(function Footer() {
         <BottomBar>
           <Address>
             <Title>kontakt:</Title>
-            <Details>+48 733783939</Details>
             <Details>agapodofotografie@gmail.com</Details>
           </Address>
           <Aside>

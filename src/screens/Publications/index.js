@@ -8,7 +8,11 @@ import Transition from "../../components/Transition";
 import Loader from "../../components/Loader";
 //utils
 import { getList } from "../../utils/strapi";
-import { setImageThumbSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
+import {
+  setImageThumbSrc,
+  setDimensions,
+  setLeastImageSrc,
+} from "../../utils/functions";
 import { setError } from "../../redux/app.slice";
 
 export default React.memo(function Publications() {
@@ -39,13 +43,16 @@ export default React.memo(function Publications() {
         setList(sessions);
       } catch (error) {
         dispatch(
-          setError([true, "Nie udało się pobrać listy publikacji. Spróbuj ponownie."])
+          setError([
+            true,
+            "Nie udało się pobrać listy publikacji. Spróbuj ponownie.",
+          ])
         );
       }
     }
 
     init();
-  }, []);
+  }, [dispatch]);
 
   if (!list) {
     return (

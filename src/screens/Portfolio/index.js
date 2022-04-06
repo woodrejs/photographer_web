@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
-//components
 import Title from "../../components/Title";
-import GridLinksList from "../../components/GridLinksList";
-import Transition from "../../components/Transition";
+import styled from "styled-components";
 import Loader from "../../components/Loader";
-//utils
+import Transition from "../../components/Transition";
+import GridLinksList from "../../components/GridLinksList";
 import { getList } from "../../utils/strapi";
-import { setImageThumbSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
 import { setError } from "../../redux/app.slice";
+import { useDispatch } from "react-redux";
+import {
+  setImageThumbSrc,
+  setDimensions,
+  setLeastImageSrc,
+} from "../../utils/functions";
 
 export default React.memo(function Portfolio() {
-  //hooks
   const dispatch = useDispatch();
   const [list, setList] = useState(null);
 
-  //effects
   useEffect(() => {
     async function init() {
       try {
@@ -39,13 +39,16 @@ export default React.memo(function Portfolio() {
         setList(sessions);
       } catch (error) {
         dispatch(
-          setError([true, "Nie udało się pobrać wszystkich sesji. Spróbuj ponownie."])
+          setError([
+            true,
+            "Nie udało się pobrać wszystkich sesji. Spróbuj ponownie.",
+          ])
         );
       }
     }
 
     init();
-  }, []);
+  }, [dispatch]);
 
   if (!list) {
     return (
@@ -73,7 +76,7 @@ export default React.memo(function Portfolio() {
     </Container>
   );
 });
-//styles
+
 const Container = styled.div`
   order: 3;
   min-height: 85vh;

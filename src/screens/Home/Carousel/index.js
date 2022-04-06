@@ -1,13 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import gsap from "gsap";
-//components
-import AliceCarousel from "react-alice-carousel";
+import React from "react";
 import Slide from "./Slide";
-//utils
-import { vars } from "../../../utils/vars";
-//assets
+import styled from "styled-components";
 import scroll_icon from "./scroll_icon.svg";
+import AliceCarousel from "react-alice-carousel";
+import { vars } from "../../../utils/vars";
 
 export default React.memo(function Carousel({ list }) {
   if (!list.length) return null;
@@ -33,13 +29,13 @@ export default React.memo(function Carousel({ list }) {
     </Container>
   );
 });
-//functions
+
 function setImages(arr) {
   return arr.map((item) => (
     <Slide url={item.src} placeholder={item.placeholder} key={item.id} />
   ));
 }
-//styles
+
 const Container = styled.div`
   width: 100%;
   display: flex;

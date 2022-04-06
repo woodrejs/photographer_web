@@ -1,32 +1,32 @@
 import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
 import gsap from "gsap";
-import { useInView } from "react-intersection-observer";
-//components
+import styled from "styled-components";
 import ImageItem from "../../../../components/ImageItem";
-//utils
 import { vars } from "../../../../utils/vars";
+import { useInView } from "react-intersection-observer";
 import { getDevice } from "../../../../utils/functions";
 
 export default React.memo(function GridList({ list }) {
-  //hooks
   const revealRefs = useRef([]);
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
   const device = getDevice();
 
-  //handlers
   const handleRef = (el) => {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
   };
 
-  //effects
   useEffect(() => {
     if (inView && device !== "mobile") {
-      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
+      gsap.to(revealRefs.current, {
+        opacity: 1,
+        ease: "power2",
+        stagger: 0.15,
+        y: -15,
+      });
     }
-  }, [inView, list]);
+  }, [inView, list, device]);
 
   return (
     <Container ref={ref}>
@@ -50,10 +50,8 @@ export default React.memo(function GridList({ list }) {
   );
 });
 
-//styles
 const Container = styled.div`
   width: 100%;
-
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr;
@@ -72,7 +70,7 @@ const Container = styled.div`
     grid-template-rows: repeat(3, 1fr);
   }
 `;
-// transform: translateY(15px);
+
 const GridItem = styled(ImageItem)`
   width: 100%;
   height: 100%;
@@ -82,13 +80,9 @@ const GridItem = styled(ImageItem)`
 
   ${(props) => generateStyle(props.index)};
 `;
-//functions
+
 function generateStyle(index) {
   let arr = [];
-
-  //template
-  //[grid_row_mobile,grid_column_mobile,grid_row_tablet,
-  // grid_column_tablet,grid_row_desktop,grid_column_desktop]
 
   switch (index) {
     case 0:
@@ -108,6 +102,8 @@ function generateStyle(index) {
       break;
     case 5:
       arr = ["unset", "unset", "5/6", "2/3", "2/4", "3/4"];
+      break;
+    default:
       break;
   }
 

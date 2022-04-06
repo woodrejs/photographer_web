@@ -17,7 +17,11 @@ import Intro from "./components/Intro";
 import Error from "./components/Error";
 //utils
 import { getList, getSlides } from "./utils/strapi";
-import { setImageSrc, setImageThumbSrc, setLeastImageSrc } from "./utils/functions";
+import {
+  setImageSrc,
+  setImageThumbSrc,
+  setLeastImageSrc,
+} from "./utils/functions";
 import { setError } from "./redux/app.slice";
 
 export default function App() {
@@ -88,11 +92,12 @@ export default function App() {
     }
 
     !error.isOpen && init();
-  }, [error]);
+  }, [error, dispatch, lists]);
 
   if (error.isOpen) return <Error message={error.message} />;
 
-  if (!lists.portfolio || !lists.publications || !lists.slides) return <Intro />;
+  if (!lists.portfolio || !lists.publications || !lists.slides)
+    return <Intro />;
 
   return (
     <Container>

@@ -9,21 +9,27 @@ import Transition from "../../components/Transition";
 import Loader from "../../components/Loader";
 //utils
 import { getSingle } from "../../utils/strapi";
-import { setImageSrc, setDimensions, setLeastImageSrc } from "../../utils/functions";
+import {
+  setImageSrc,
+  setDimensions,
+  setLeastImageSrc,
+} from "../../utils/functions";
 import { setError } from "../../redux/app.slice";
-import { vars } from "../../utils/vars";
 
 export default function Single() {
-  //hooks
   const dispatch = useDispatch();
   const [single, setSingle] = useState(null);
   const { pathname } = useLocation();
+  // eslint-disable-next-line no-unused-vars
   const [_, singleName, singleId] = pathname.split("/");
 
   useEffect(() => {
     async function init() {
       try {
-        const { id, title, images, date } = await getSingle(singleName, singleId);
+        const { id, title, images, date } = await getSingle(
+          singleName,
+          singleId
+        );
 
         setSingle({
           id,
@@ -43,12 +49,17 @@ export default function Single() {
           }),
         });
       } catch (error) {
-        dispatch(setError([true, "Nie udało się pobrać listy zdjęć. Spróbuj ponownie."]));
+        dispatch(
+          setError([
+            true,
+            "Nie udało się pobrać listy zdjęć. Spróbuj ponownie.",
+          ])
+        );
       }
     }
 
     init();
-  }, []);
+  }, [dispatch, singleId, singleName]);
 
   if (!single)
     return (

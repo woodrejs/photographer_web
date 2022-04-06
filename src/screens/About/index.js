@@ -1,20 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
-import LazyImage from "react-lazy-blur-image";
 import gsap from "gsap";
-//components
 import Title from "../../components/Title";
-import Transition from "../../components/Transition";
-//utils
-import { vars } from "../../utils/vars";
-import { getDevice } from "../../utils/functions";
-//assets
+import styled from "styled-components";
 import sm_img from "./about_767.jpg";
 import md_img from "./about_991.jpg";
 import lg_img from "./about_1366.jpg";
+import LazyImage from "react-lazy-blur-image";
+import Transition from "../../components/Transition";
+import { vars } from "../../utils/vars";
+import { getDevice } from "../../utils/functions";
 
 export default React.memo(function About() {
-  //hooks
   const ref = useRef(null);
 
   const getSrc = () => {
@@ -25,12 +21,11 @@ export default React.memo(function About() {
         return md_img;
       case "desktop":
         return lg_img;
+      default:
+        break;
     }
   };
 
-  console.log(getSrc());
-
-  //effects
   useEffect(() => {
     gsap.to(ref.current, { opacity: 1, ease: "power2", y: -15 });
   }, []);
@@ -52,19 +47,19 @@ export default React.memo(function About() {
           Hej! Miło mi, że tu jesteś. Mam na imię Aga i kocham piękne kadry.
           <br />
           <br />
-          Jestem fotografem z zamiłowaniem do portretów a swoją przygodę z fotografią
-          zaczęłam kilkanaście lat temu. Obecnie realizuję się w stylizowanych sesjach
-          modowych, ale nie straszne mi też zdjęcia spontaniczne i naturalne. Dzięki tym
-          skrajnościom mogę uchwycić charakter modela i uzyskać ciekawe efekty. Pasjonują
-          mnie przedmioty i moda vintage, które również wykorzystuję w sesjach
-          zdjęciowych. Jeśli podoba Ci się moja stylistyka, zapraszam do kontaktu.
+          Jestem fotografem z zamiłowaniem do portretów a swoją przygodę z
+          fotografią zaczęłam kilkanaście lat temu. Obecnie realizuję się w
+          stylizowanych sesjach modowych, ale nie straszne mi też zdjęcia
+          spontaniczne i naturalne. Dzięki tym skrajnościom mogę uchwycić
+          charakter modela i uzyskać ciekawe efekty. Pasjonują mnie przedmioty i
+          moda vintage, które również wykorzystuję w sesjach zdjęciowych. Jeśli
+          podoba Ci się moja stylistyka, zapraszam do kontaktu.
         </Text>
       </Box>
     </Container>
   );
 });
 
-//styles
 const Container = styled.div`
   min-height: 85vh;
   width: 100%;

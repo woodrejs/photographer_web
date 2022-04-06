@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
-import { useInView } from "react-intersection-observer";
-import LazyImage from "react-lazy-blur-image";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-//components
 import Badge from "../Badge";
-//utils
+import styled from "styled-components";
+import LazyImage from "react-lazy-blur-image";
 import { vars } from "../../utils/vars";
+import { useInView } from "react-intersection-observer";
 
 export default function GridItem({ photo, handler, top, left, badge = null }) {
-  //hooks
-  const { ref, inView, entry } = useInView({ threshold: 0.15, triggerOnce: true });
+  const { ref, inView, entry } = useInView({
+    threshold: 0.15,
+    triggerOnce: true,
+  });
   const imageRef = useRef(null);
 
-  //   //handlers
   const handleOnClick = () => handler();
   const handleMouseEnter = () => {
     gsap.to(imageRef.current, {
@@ -34,7 +33,6 @@ export default function GridItem({ photo, handler, top, left, badge = null }) {
     });
   };
 
-  //   //effects
   useEffect(() => {
     if (inView) {
       gsap.to(entry.target, { opacity: 1, ease: "power2", y: -15 });
@@ -58,14 +56,20 @@ export default function GridItem({ photo, handler, top, left, badge = null }) {
           placeholder={photo.placeholder}
           uri={photo.src}
           render={(src, style) => (
-            <img {...photo} ref={imageRef} onClick={handleOnClick} style={style} />
+            <img
+              {...photo}
+              ref={imageRef}
+              onClick={handleOnClick}
+              style={style}
+              alt=""
+            />
           )}
         />
       </Box>
     </Container>
   );
 }
-//styles
+
 const Container = styled.div`
   position: absolute;
   left: ${({ left }) => `${left}px`};
@@ -75,7 +79,6 @@ const Container = styled.div`
   cursor: pointer;
   overflow: hidden;
   transform-origin: center;
-
   padding: 10px;
 `;
 const Box = styled.div`
@@ -84,4 +87,3 @@ const Box = styled.div`
   overflow: hidden;
   ${vars.shadow}
 `;
-const Image = styled.img``;

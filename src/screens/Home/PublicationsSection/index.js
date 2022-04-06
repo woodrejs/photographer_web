@@ -1,33 +1,33 @@
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import styled from "styled-components";
-import { useInView } from "react-intersection-observer";
-//components
 import ButtonLink from "../../../components/ButtonLink";
 import ImageItem from "../../../components/ImageItem";
-//utils
 import { vars } from "../../../utils/vars";
+import { useInView } from "react-intersection-observer";
 import { getDevice } from "../../../utils/functions";
 
 export default React.memo(function PublicationSection({ list }) {
-  //hooks
   const revealRefs = useRef([]);
   const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true });
   const device = getDevice();
 
-  //handlers
   const handleRef = (el) => {
     if (el && !revealRefs.current.includes(el)) {
       revealRefs.current.push(el);
     }
   };
 
-  //effects
   useEffect(() => {
     if (inView && device !== "mobile") {
-      gsap.to(revealRefs.current, { opacity: 1, ease: "power2", stagger: 0.15, y: -15 });
+      gsap.to(revealRefs.current, {
+        opacity: 1,
+        ease: "power2",
+        stagger: 0.15,
+        y: -15,
+      });
     }
-  }, [inView]);
+  }, [inView, device]);
 
   if (!list.length) return null;
 
@@ -54,9 +54,9 @@ export default React.memo(function PublicationSection({ list }) {
           })}
 
           <Text>
-            Publikacje ukazały się w magazynach między innymi w Niemczech, Wielkiej
-            Brytanii, Francji, Holandii jak i w magazynach międzynarodowych lub magazynach
-            online.
+            Publikacje ukazały się w magazynach między innymi w Niemczech,
+            Wielkiej Brytanii, Francji, Holandii jak i w magazynach
+            międzynarodowych lub magazynach online.
           </Text>
         </Grid>
       </Box>
@@ -64,7 +64,6 @@ export default React.memo(function PublicationSection({ list }) {
   );
 });
 
-//styles
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -80,9 +79,7 @@ const Box = styled.section`
   max-width: 1366px;
   width: 100%;
   padding: 0 20px;
-
   height: 250vh;
-
   @media ${vars.device.tablet} {
     height: 140vh;
   }
@@ -95,7 +92,6 @@ const Grid = styled.div`
   width: 100%;
   height: 100%;
   grid-gap: 20px;
-
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 15vh repeat(4, 1fr) 15vh;
@@ -116,7 +112,6 @@ const GridButton = styled(ButtonLink)`
   }
   @media ${vars.device.desktop} {
     grid-column: 1/2;
-
     justify-self: start;
     align-self: start;
   }
@@ -149,13 +144,9 @@ const Text = styled.p`
     grid-column: 1/2;
   }
 `;
-//functions
+
 function generateStyle(index) {
   let arr = [];
-
-  //template
-  //[grid_row_mobile,grid_column_mobile,grid_row_tablet,
-  // grid_column_tablet,grid_row_desktop,grid_column_desktop]
 
   switch (index) {
     case 0:
@@ -169,6 +160,8 @@ function generateStyle(index) {
       break;
     case 3:
       arr = ["unset", "unset", "3/5", "2/3", "3/4", "4/5"];
+      break;
+    default:
       break;
   }
 
